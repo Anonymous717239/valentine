@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Valentine 💖</title>
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+        margin: 0;
+        height: 100vh;
+        background: #f9fafc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        transition: background 1s ease;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .sub {
+        color: #777;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    button {
+        padding: 10px 22px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.25s ease;
+    }
+
+    #yes {
+        background: #22c55e;
+        color: white;
+    }
+
+    #no {
+        background: #ef4444;
+        color: white;
+    }
+
+    .message {
+        margin-top: 25px;
+        font-size: 1.3rem;
+        font-weight: 500;
+        display: none;
+    }
+
+    .heart {
+        position: absolute;
+        font-size: 24px;
+        animation: floatUp 4s linear forwards;
+    }
+
+    @keyframes floatUp {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(-600px);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Evlina… will you be my Valentine? 💘</h1>
+    <div class="sub">— from Milton 😊</div>
+
+    <div class="buttons">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+
+    <div class="message" id="message">
+        YAY Evlina!! 💖💖💖  
+        You just made Milton the happiest guy alive 🥰
+    </div>
+</div>
+
+<audio id="music" src="https://cdn.pixabay.com/audio/2022/10/16/audio_8c6f2c1b1c.mp3"></audio>
+
+<script>
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const message = document.getElementById("message");
+const music = document.getElementById("music");
+
+let yesScale = 1;
+
+function growYes() {
+    yesScale += 0.15;
+    yesBtn.style.transform = `scale(${yesScale})`;
+}
+
+// Mobile + desktop friendly
+noBtn.addEventListener("click", growYes);
+noBtn.addEventListener("touchstart", growYes);
+noBtn.addEventListener("mouseenter", growYes);
+
+yesBtn.addEventListener("click", () => {
+    document.body.style.background = "#ffe4ec";
+    message.style.display = "block";
+    music.play();
+    launchHearts();
+});
+
+function launchHearts() {
+    for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "0px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+    }
+}
+</script>
+
+</body>
+</html>
